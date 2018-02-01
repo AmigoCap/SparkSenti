@@ -1,0 +1,8 @@
+servers = [
+    {
+        name = "sparksenti"
+        host = "HOST"
+        user = "USER"
+        password = "PASSWORD"
+    }
+]

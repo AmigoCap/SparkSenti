@@ -1,5 +1,6 @@
 *.class
 *.log
+server.conf
 
 # sbt specific
 target/
