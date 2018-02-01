@@ -1,5 +1,9 @@
 package algo1_worksheet
 
+import org.apache.spark.SparkContext
+import org.apache.spark.SparkContext._
+import org.apache.spark.SparkConf
+
 import scala.io.Source
 import scalaz._
 import Scalaz._
@@ -8,7 +12,9 @@ object test extends App {
   //emplacement des fichiers sources
   var tweet_path:String="./tweets.txt"
   //Formatage des fichiers sources
-  val tweetsList = Source.fromFile(tweet_path).getLines.toArray
+
+  val sc = new SparkContext(new SparkConf().setAppName("Spark Count"))
+  val tweetsList = sc.textFile(tweet_path).collect.toArray
   val dico=Dictionary.dictionary
   //Dictionary.dictionary.foreach(println)
   //val dico=dictionary
@@ -72,7 +78,7 @@ object Dictionary {
   def dictionary: Map[(String, Char), List[(Double, Double)]] =
     scala.io.Source.fromFile(dico_path).getLines.toList
       .foldLeft(Map(): Map[(String, Char), List[(Double, Double)]])
-      { case (map, line) => if (List('#', '\t').contains(line.head)) map else map |+| getMap(line)}
+        { case (map, line) => if (List('#', '\t').contains(line.head)) map else map |+| getMap(line)}
 
   def getMap(line: String): Map[(String, Char), List[(Double, Double)]] = {
     val cells = line.split("\t")
