@@ -63,7 +63,7 @@ object test extends App {
 //Partie Formatage Dico : Richard
 
 object Dictionary {
-  val dico_path = "/Users/Frego/Documents/Centrale/4A/OPTION/08_Projet/Algo1/dico.txt"
+  val dico_path = "./SentiWordNet.txt"
   val wordPosition = 4
   val negScorePosition = 3
   val posScorePosition = 2
