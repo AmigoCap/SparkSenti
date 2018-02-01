@@ -1,5 +1,8 @@
 package algo1_worksheet
+
 import scala.io.Source
+import scalaz._
+import Scalaz._
 
 object test extends App {
   //emplacement des fichiers sources
@@ -64,18 +67,19 @@ object Dictionary {
   val wordPosition = 4
   val negScorePosition = 3
   val posScorePosition = 2
+  val typePosition = 0
 
-  def dictionary: Map[String, (Double, Double)] =
+  def dictionary: Map[(String, Char), List[(Double, Double)]] =
     scala.io.Source.fromFile(dico_path).getLines.toList
-      .foldLeft(Map(): Map[String, (Double, Double)])
-      { case (map, line) => if (List('#', '\t').contains(line.head)) map else map ++ getMap(line)}
+      .foldLeft(Map(): Map[(String, Char), List[(Double, Double)]])
+      { case (map, line) => if (List('#', '\t').contains(line.head)) map else map |+| getMap(line)}
 
-  def getMap(line: String): Map[String, (Double, Double)] = {
+  def getMap(line: String): Map[(String, Char), List[(Double, Double)]] = {
     val cells = line.split("\t")
 
     cells(wordPosition)
       .split("#[0-9]* ?")
-      .filter(_ != "")
-      .foldLeft(Map(): Map[String, (Double, Double)]) { case (map, word) => map + (word -> (cells(posScorePosition).toDouble, cells(negScorePosition).toDouble)) }
+      .foldLeft(Map(): Map[(String, Char), List[(Double, Double)]])
+        { case (map, word) => map |+| Map((word, cells(typePosition).head) -> List((cells(posScorePosition).toDouble, cells(negScorePosition).toDouble))) }
   }
 }
