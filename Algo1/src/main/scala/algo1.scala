@@ -20,7 +20,7 @@ object test extends App {
   println(analysis(tweetsList,dico)(1)(0),analysis(tweetsList,dico)(1)(1))
 
   //Observe le score et ajoute le tweet et le resultat dans un Array
-  def analysis(tweets:Array[String],dico:Map[String,(Double,Double)]) : Array[Array[String]] = {
+  def analysis(tweets:Array[String],dico:Map[(String, Char), List[(Double,Double)]]) : Array[Array[String]] = {
     var output=Array(Array("",""))
     var n=tweets.size
     for (tweet<-tweets) {
@@ -50,7 +50,7 @@ object test extends App {
     var sum=0.0
     for (word<-words) {
       if (dico.keySet.exists(_ == word)) {
-        sum=sum+dico(word)._1 - dico(word)._2
+        sum=sum + dico((word, 'a')).foldLeft(0: Double){ case (acc, elem) => acc + (elem._1 - elem._2) }
       }
 
     }
