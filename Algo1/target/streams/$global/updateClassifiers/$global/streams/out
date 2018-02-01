@@ -1,0 +1,55 @@
+[debug] :: resolving dependencies :: default#algo1$sources;0.1
+[debug] 	confs: [compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool]
+[debug] 	validate = true
+[debug] 	refresh = false
+[debug] resolving dependencies for configuration 'compile'
+[debug] == resolving dependencies for default#algo1$sources;0.1 [compile]
+[debug] resolving dependencies for configuration 'runtime'
+[debug] == resolving dependencies for default#algo1$sources;0.1 [runtime]
+[debug] == resolving dependencies for default#algo1$sources;0.1 [compile]
+[debug] resolving dependencies for configuration 'test'
+[debug] == resolving dependencies for default#algo1$sources;0.1 [test]
+[debug] == resolving dependencies for default#algo1$sources;0.1 [runtime]
+[debug] == resolving dependencies for default#algo1$sources;0.1 [compile]
+[debug] resolving dependencies for configuration 'provided'
+[debug] == resolving dependencies for default#algo1$sources;0.1 [provided]
+[debug] resolving dependencies for configuration 'optional'
+[debug] == resolving dependencies for default#algo1$sources;0.1 [optional]
+[debug] resolving dependencies for configuration 'compile-internal'
+[debug] == resolving dependencies for default#algo1$sources;0.1 [compile-internal]
+[debug] == resolving dependencies for default#algo1$sources;0.1 [compile]
+[debug] == resolving dependencies for default#algo1$sources;0.1 [optional]
+[debug] == resolving dependencies for default#algo1$sources;0.1 [provided]
+[debug] resolving dependencies for configuration 'runtime-internal'
+[debug] == resolving dependencies for default#algo1$sources;0.1 [runtime-internal]
+[debug] == resolving dependencies for default#algo1$sources;0.1 [runtime]
+[debug] == resolving dependencies for default#algo1$sources;0.1 [compile]
+[debug] == resolving dependencies for default#algo1$sources;0.1 [optional]
+[debug] resolving dependencies for configuration 'test-internal'
+[debug] == resolving dependencies for default#algo1$sources;0.1 [test-internal]
+[debug] == resolving dependencies for default#algo1$sources;0.1 [test]
+[debug] == resolving dependencies for default#algo1$sources;0.1 [runtime]
+[debug] == resolving dependencies for default#algo1$sources;0.1 [compile]
+[debug] == resolving dependencies for default#algo1$sources;0.1 [optional]
+[debug] == resolving dependencies for default#algo1$sources;0.1 [provided]
+[debug] resolving dependencies for configuration 'plugin'
+[debug] == resolving dependencies for default#algo1$sources;0.1 [plugin]
+[debug] resolving dependencies for configuration 'pom'
+[debug] == resolving dependencies for default#algo1$sources;0.1 [pom]
+[debug] resolving dependencies for configuration 'scala-tool'
+[debug] == resolving dependencies for default#algo1$sources;0.1 [scala-tool]
+[debug] 	resolved ivy file produced in cache
+[debug] :: downloading artifacts ::
+[debug] :: resolution report :: resolve 32ms :: artifacts dl 1ms
+[debug] 	report for default#algo1$sources;0.1 compile produced in /Users/Frego/Documents/Centrale/4A/OPTION/08_Projet/Algo1/target/scala-2.12/resolution-cache/reports/default-algo1$sources-compile.xml
+[debug] 	report for default#algo1$sources;0.1 runtime produced in /Users/Frego/Documents/Centrale/4A/OPTION/08_Projet/Algo1/target/scala-2.12/resolution-cache/reports/default-algo1$sources-runtime.xml
+[debug] 	report for default#algo1$sources;0.1 test produced in /Users/Frego/Documents/Centrale/4A/OPTION/08_Projet/Algo1/target/scala-2.12/resolution-cache/reports/default-algo1$sources-test.xml
+[debug] 	report for default#algo1$sources;0.1 provided produced in /Users/Frego/Documents/Centrale/4A/OPTION/08_Projet/Algo1/target/scala-2.12/resolution-cache/reports/default-algo1$sources-provided.xml
+[debug] 	report for default#algo1$sources;0.1 optional produced in /Users/Frego/Documents/Centrale/4A/OPTION/08_Projet/Algo1/target/scala-2.12/resolution-cache/reports/default-algo1$sources-optional.xml
+[debug] 	report for default#algo1$sources;0.1 compile-internal produced in /Users/Frego/Documents/Centrale/4A/OPTION/08_Projet/Algo1/target/scala-2.12/resolution-cache/reports/default-algo1$sources-compile-internal.xml
+[debug] 	report for default#algo1$sources;0.1 runtime-internal produced in /Users/Frego/Documents/Centrale/4A/OPTION/08_Projet/Algo1/target/scala-2.12/resolution-cache/reports/default-algo1$sources-runtime-internal.xml
+[debug] 	report for default#algo1$sources;0.1 test-internal produced in /Users/Frego/Documents/Centrale/4A/OPTION/08_Projet/Algo1/target/scala-2.12/resolution-cache/reports/default-algo1$sources-test-internal.xml
+[debug] 	report for default#algo1$sources;0.1 plugin produced in /Users/Frego/Documents/Centrale/4A/OPTION/08_Projet/Algo1/target/scala-2.12/resolution-cache/reports/default-algo1$sources-plugin.xml
+[debug] 	report for default#algo1$sources;0.1 pom produced in /Users/Frego/Documents/Centrale/4A/OPTION/08_Projet/Algo1/target/scala-2.12/resolution-cache/reports/default-algo1$sources-pom.xml
+[debug] 	report for default#algo1$sources;0.1 scala-tool produced in /Users/Frego/Documents/Centrale/4A/OPTION/08_Projet/Algo1/target/scala-2.12/resolution-cache/reports/default-algo1$sources-scala-tool.xml
+[debug] 	resolve done (32ms resolve - 1ms download)
