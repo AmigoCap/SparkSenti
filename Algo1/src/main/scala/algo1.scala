@@ -6,7 +6,7 @@ import Scalaz._
 
 object test extends App {
   //emplacement des fichiers sources
-  var tweet_path:String="/Users/Frego/Documents/Centrale/4A/OPTION/08_Projet/Algo1/tweets.txt"
+  var tweet_path:String="./tweets.txt"
   //Formatage des fichiers sources
   val tweetsList = Source.fromFile(tweet_path).getLines.toArray
   val dico=Dictionary.dictionary
@@ -49,7 +49,7 @@ object test extends App {
   def get_score_words(words:Array[String]):Double={
     var sum=0.0
     for (word<-words) {
-      if (dico.keySet.exists(_ == word)) {
+      if (dico.keySet.exists(key => (key._1, key._2) == (word, 'a'))) {
         sum=sum + dico((word, 'a')).foldLeft(0: Double){ case (acc, elem) => acc + (elem._1 - elem._2) }
       }
 
