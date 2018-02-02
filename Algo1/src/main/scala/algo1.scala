@@ -10,7 +10,7 @@ import Scalaz._
 
 object test extends App {
   //emplacement des fichiers sources
-  var tweet_path:String="./tweets.txt"
+  var tweet_path:String="tweets.txt"
   //Formatage des fichiers sources
 
   val sc = new SparkContext(new SparkConf().setAppName("SparkSenti"))
@@ -69,7 +69,7 @@ object test extends App {
 //Partie Formatage Dico : Richard
 
 object Dictionary {
-  val dico_path = "./SentiWordNet.txt"
+  val dico_path = "SentiWordNet.txt"
   val wordPosition = 4
   val negScorePosition = 3
   val posScorePosition = 2
