@@ -13,7 +13,7 @@ object test extends App {
   var tweet_path:String="./tweets.txt"
   //Formatage des fichiers sources
 
-  val sc = new SparkContext(new SparkConf().setAppName("Spark Count"))
+  val sc = new SparkContext(new SparkConf().setAppName("SparkSenti"))
   val tweetsList = sc.textFile(tweet_path).collect.toArray
   val dico=Dictionary.dictionary
   //Dictionary.dictionary.foreach(println)
