@@ -35,12 +35,12 @@ def getCredentials = {
 }
 
 push := {
-    val jarName = pack.value
+    val source = pack.value
     val (server, password) = getCredentials
     val directory = "SparkSenti-0.1/lib"
-    val fileName = s"target/pack/lib/${jarName}"
+    val file = "target/scala-2.11/sparksenti_2.11-0.1.jar"
 
-    s"./push.sh ${fileName} ${server} ${password} ${directory}" !
+    s"./push.sh ${file} ${server} ${password} ${directory}" !
 }
 
 pushAll := {
