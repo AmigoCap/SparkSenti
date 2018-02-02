@@ -2,7 +2,6 @@ import scala.io.Source
 import scala.sys.process._
 import java.io._
 
-
 lazy val root = (project in file(".")).
     settings(
         inThisBuild(List(
@@ -36,9 +35,10 @@ def getCredentials = {
 }
 
 push := {
+    val jarName = pack.value
     val (server, password) = getCredentials
-    val directory = "SparkSenti-0.1"
-    val fileName = "target/pack/lib/sparksenti_2.11-0.1.jar"
+    val directory = "SparkSenti-0.1/lib"
+    val fileName = s"target/pack/lib/${jarName}"
 
     s"./push.sh ${fileName} ${server} ${password} ${directory}" !
 }
