@@ -12,5 +12,8 @@
     expect "$ "
     send "hdfs dfs -put tweets.txt\r"
     expect "$ "
+    send "tar xzvf $1\r"
     close
 EOD
+
+echo
