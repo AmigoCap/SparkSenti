@@ -2,7 +2,7 @@
 
 /usr/bin/expect << EOD
     set timeout -1
-    spawn scp $1 "SentiWordNet.txt" "tweets.txt" $2:.
+    spawn scp $1 "SentiWordNet.txt" $2:.
     expect "*password*"
     send "$3\r"
     expect eof
@@ -10,9 +10,8 @@
     expect "*password*"
     send "$3\r"
     expect "$ "
-    send "hdfs dfs -put tweets.txt\r"
+    send "tar xzvf SparkSenti-0.1.tar.gz\r"
     expect "$ "
-    send "tar xzvf $1\r"
     close
 EOD
 

@@ -9,13 +9,15 @@ import scala.io.Source
 import scalaz._
 import Scalaz._
 
+import play.api.libs.json._
+
 object test extends App {
   //emplacement des fichiers sources
-  var tweet_path ="tweets.txt"
+  var tweet_path = args(0)
   //Formatage des fichiers sources
 
   val sc = new SparkContext(new SparkConf().setAppName("SparkSenti"))
-  val tweetsList = sc.textFile(tweet_path)
+  val tweetsList = sc.textFile(tweet_path).map(elem => (Json.parse(elem) \ "text").as[String])
   val dico = Dictionary.dictionary
 
   //Affichage du resultat

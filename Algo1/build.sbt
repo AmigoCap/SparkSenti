@@ -12,6 +12,7 @@ lazy val root = (project in file(".")).
         name := "SparkSenti",
         libraryDependencies ++= Seq(
             "org.scalaz" %% "scalaz-core" % "7.2.18",
+            "com.typesafe.play" %% "play-json" % "2.6.7",
             "org.apache.spark" %% "spark-core" % "2.2.1" % "provided",
             "org.apache.spark" %% "spark-yarn" % "2.2.1" % "provided"
         ),
@@ -22,7 +23,8 @@ lazy val root = (project in file(".")).
 val init = taskKey[Unit]("Initialize the server.conf file")
 val push = taskKey[Unit]("Send only application jar to server")
 val pushAll = taskKey[Unit]("Package, compress and send to server every needed files")
-val submit = taskKey[Unit]("Decompress and submit spark job")
+val submit = inputKey[Unit]("Decompress and submit spark job")
+val put = inputKey[Unit]("Send a file to the remote server and put it into hdfs")
 
 def getCredentials = {
     val regexp = "(.*)=(.*)".r
@@ -40,7 +42,14 @@ push := {
     val directory = "SparkSenti-0.1/lib"
     val file = "target/scala-2.11/sparksenti_2.11-0.1.jar"
 
-    s"./push.sh ${file} ${server} ${password} ${directory}" !
+    s"./scripts/push.sh ${file} ${server} ${password} ${directory}" !
+}
+
+put := {
+    val fileName = Def.spaceDelimited("<arg>").parsed.head
+    val (server, password) = getCredentials
+
+    s"./scripts/put.sh ${fileName} ${server} ${password}" !
 }
 
 pushAll := {
@@ -48,14 +57,15 @@ pushAll := {
     val gzArchive = archives.head
     val (server, password) = getCredentials
 
-    s"./push-all.sh ${gzArchive} ${server} ${password}" !
+    s"./scripts/push-all.sh ${gzArchive} ${server} ${password}" !
 }
 
 submit := {
+    val fileName = Def.spaceDelimited("<arg>").parsed.head
     val (server, password) = getCredentials
     val directory = "SparkSenti-0.1"
 
-    s"./submit.sh ${directory} ${server} ${password}" !
+    s"./scripts/submit.sh ${directory} ${server} ${password} ${fileName}" !
 }
 
 init := {
