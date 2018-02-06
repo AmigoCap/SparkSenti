@@ -1,5 +1,4 @@
 #!/bin/bash
-
 /usr/bin/expect -c '
     set timeout 60
     spawn ssh '"$2"'
@@ -13,5 +12,4 @@
     expect "$ "
     close
 '
-
 echo
