@@ -61,11 +61,19 @@ pushAll := {
 }
 
 submit := {
-    val fileName = Def.spaceDelimited("<arg>").parsed.head
+	val args = Def.spaceDelimited("<arg>").parsed
+    val fileName = args(0)
+	var outName = ""
+	if (args.length<2)
+	{
+		outName = "defaultoutput.txt"
+	}
+	else
+		{outName = args(1)}
     val (server, password) = getCredentials
     val directory = "SparkSenti-0.1"
 
-    s"./scripts/submit.sh ${directory} ${server} ${password} ${fileName}" !
+    s"./scripts/submit.sh ${directory} ${server} ${password} ${fileName} ${outName}" !
 }
 
 init := {
