@@ -2,7 +2,7 @@
 
 Projet d'analyse de sentiments dans les tweet avec Spark / Hadoop
 
-## Prérequis
+# Prérequis
 
 Pour fonctionner, vous devez avoir à disposition Git, Java8 et sbt sur votre système d'exploitation.
 
@@ -29,6 +29,7 @@ Vous pouvez vous assurer que sbt est bien installé avec la commande :
 sbt about
 ```
 **Java8**
+
 Vérifier que vous avez la version Java8 (1.8) à disposition :
 ```
 java -version
@@ -63,7 +64,7 @@ java version "1.8"
 Si votre version est supérieur, vous devez changer de version :  [Change the default Java (JDK)](https://stackoverflow.com/questions/21964709/how-to-set-or-change-the-default-java-jdk-version-on-os-x)
 Si votre version est inférieur, rendez vous sur le site de [Java](https://www.java.com/fr/download/)
 
-## Installation du projet
+# Installation du projet
 
 Depuis votre terminal rendez vous dans le dossier où vous désirez stocker le projet et entrez la commande :
 ```
@@ -75,7 +76,7 @@ Rentrez ensuite dans le dossier de l'algorithme d'analyse :
 cd SparkSenti/Algo1/
 ```
 
-## Utilisation
+# Utilisation
 
 **Lancement de sbt**
 
