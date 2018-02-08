@@ -1,7 +1,7 @@
 #!/bin/bash
 
 /usr/bin/expect -c '
-    set timeout 60
+    set timeout -1
     spawn ssh '"$2"'
     expect "*password*"
     send "'"$3"'\r"

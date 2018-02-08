@@ -11,6 +11,56 @@ import Scalaz._
 
 import play.api.libs.json._
 
+import java.util.Properties
+import edu.stanford.nlp.pipeline._
+import edu.stanford.nlp.ling.CoreAnnotations._
+import edu.stanford.nlp.rnn.RNNCoreAnnotations
+import edu.stanford.nlp.sentiment.SentimentCoreAnnotations._
+
+import scala.collection.JavaConversions._
+
+object corenlp {
+  val props = new Properties()
+  props.setProperty("annotators", "tokenize, ssplit, parse, lemma, sentiment")
+  val pipeline: StanfordCoreNLP = new StanfordCoreNLP(props)
+  val verb = "(V.*)".r
+  val adjective = "(J.*)".r
+  val noun = "(N.*)".r
+  val adverb = "(RB.*)".r
+
+  def extract(text: String): Array[(String, Char)] = {
+    val doc: Annotation = new Annotation(text.toLowerCase)
+    pipeline.annotate(doc)
+    val sentences = doc.get(classOf[SentencesAnnotation])
+
+    sentences
+      .flatMap { sentence => sentence.get(classOf[TokensAnnotation])
+        .map { token =>
+          val lemma = token.get(classOf[LemmaAnnotation])
+          token.get(classOf[PartOfSpeechAnnotation]) match {
+            case verb(_*)      => (lemma, 'v')
+            case noun(_*)      => (lemma, 'n')
+            case adjective(_*) => (lemma, 'a')
+            case adverb(_*)    => (lemma, 'r')
+            case _             => ("", '_')
+          }
+        }
+      }
+      .toArray
+  }
+
+  def get_score(text: String): Int = {
+    val doc: Annotation = new Annotation(text.toLowerCase)
+    pipeline.annotate(doc)
+    val sentences = doc.get(classOf[SentencesAnnotation])
+
+    math.round(sentences
+      .map { sentence => RNNCoreAnnotations.getPredictedClass(sentence.get(classOf[AnnotatedTree])) }
+      .sum / sentences.length
+    ).toInt
+  }
+}
+
 object test extends App {
   //emplacement des fichiers sources
   var tweet_path = args(0)
@@ -22,15 +72,32 @@ object test extends App {
 
   //Affichage du resultat
   println(analysis(tweetsList, dico))
+  println(analysis2(tweetsList))
 
   //Observe le score
   def analysis(tweets: RDD[String], dico: Dictionary.MapWordScore): String = {
     tweets
-      .map { case (tweet) => (tweet, get_score_words(tweet.toLowerCase.split("\\W+"), dico)) }
+      .map { case (tweet) => (tweet, get_score_words(corenlp.extract(tweet), dico)) }
       .aggregate("\n")(
         { case (output, (tweet: String, score: Double)) => s"${output}Tweet: ${tweet}\nScore: ${get_sentiment(score)}\n\n" },
         { _ ++ _ }
       )
+  }
+
+  def analysis2(tweets: RDD[String]): String =
+    tweets
+        .map { case (tweet) => (tweet, corenlp.get_score(tweet)) }
+        .aggregate("\n")(
+          { case (output, (tweet: String, score: Int)) => s"${output}Tweet: ${tweet}\nScore: ${get_sentiment2(score)}\n\n" },
+          { _ ++ _ }
+        )
+
+  def get_sentiment2(score: Int): String = score match {
+    case 0 => "Très négatif"
+    case 1 => "Négatif"
+    case 2 => "Neutre"
+    case 3 => "Positif"
+    case 4 => "Très positif"
   }
 
   def get_sentiment(score: Double): String = score match {
@@ -40,10 +107,10 @@ object test extends App {
   }
 
   //Calcul le score d'une liste de mot
-  def get_score_words(words: Array[String], dico: Dictionary.MapWordScore): Double = {
-    words
-      .filter { word => dico.keySet.exists({ key => (key._1, key._2) == (word, 'a') }) }
-      .map { word => dico((word, 'a')).foldLeft(0: Double) { case (acc, elem) => acc + (elem._1 - elem._2) } }
+  def get_score_words(wordsType: Array[(String, Char)], dico: Dictionary.MapWordScore): Double = {
+    wordsType
+      .filter { wordType => dico.keySet.exists({ key => (key._1, key._2) == wordType }) }
+      .map { wordType => dico(wordType).foldLeft(0: Double) { case (acc, elem) => acc + (elem._1 - elem._2) } }
       .foldLeft(0: Double)(_+_)
   }
 }
