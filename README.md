@@ -101,7 +101,7 @@ Ce script permet de créer un fichier de configuration pour la connection ssh ve
 A partir de cette étape vous devez être sur le réseau local de l'Ecole Centrale ou utiliser un VPN.
 Le script vous demande d'entrer les paramètres :
 * user : votre nom d'utilisateur sur le datacenter Amigo
-* host : l'adresse IP du datacenter (156.18.90.100)
+* host : l'adresse IP du datacenter.
 * password : le mot de passe de votre compte sur le datacenter
 
 Vous devez alors pouvoir lire :
@@ -136,7 +136,7 @@ où `nom_du_fichier` est un fichier qui a été `put` au préalable (stocké en 
 
 Se connecter en SSH à votre compte :
 ```
-ssh user@156.18.90.100
+ssh user@IP
 ```
 Lire le fichier `defaultoutput.txt` à la racine :
 ```
