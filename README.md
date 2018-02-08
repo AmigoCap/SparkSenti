@@ -131,6 +131,16 @@ sbt:SparkSenti> submit "nom_du_fichier.json"
 
 où `nom_du_fichier` est un fichier qui a été `put` au préalable (stocké en HDFS sur le datacer).
 
+**Visualisation des résultats**
+
+Se connecter en SSH à votre compte :
+```
+ssh user@156.18.90.100
+```
+Lire le fichier `defaultoutput.txt` à la racine :
+```
+cat defaultoutput.txt
+```
 
 **Remarque :**
 
