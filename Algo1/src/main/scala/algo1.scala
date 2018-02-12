@@ -71,18 +71,53 @@ object test extends App {
   val dico = Dictionary.dictionary
 
   //Affichage du resultat
-  println(analysis(tweetsList, dico))
-  println(analysis2(tweetsList))
+  val analysis1 = analysis(tweetsList, dico)
+  analysis1.collect().foreach(println)
+  //println(analysis2(tweetsList))
+  println("\nDo you wish to make a performance test based on a sample ? (y/n)")
+  val yesno = scala.io.Source.fromInputStream(System.in).bufferedReader().readLine()
+  println("ok let's go")
+  if (yesno == "y"){
+	val nbTot = analysis1.count()
+	var opinion = ""
+	var neg_neg = 0
+	var neg_neu = 0
+	var neg_pos = 0
+	var neu_neg = 0
+	var neu_neu = 0
+	var neu_pos = 0
+	var pos_neg = 0
+	var pos_neu = 0
+  	var pos_pos = 0
+	val sample = analysis1.takeSample(false, (nbTot/10).toInt, System.nanoTime.toInt)
+	sample
+		.foreach{
+			case (tweet,result) =>	{
+				println(result)
+				println("Is the meaning of this tweet positive, negative or neutral (pos/neg/neu) ?")
+				opinion = scala.io.StdIn.readLine()
+				(opinion,result) match {
+					case ("neg","neg")=> neg_neg += 1
+					case ("neg","neu")=> neg_neu += 1
+					case ("neg","pos")=> neg_pos += 1	
+					case ("neu","neg")=> neu_neg += 1	
+					case ("neu","neu")=> neu_neu += 1	
+					case ("neu","pos")=> neu_pos += 1	
+					case ("pos","neg")=> pos_neg += 1	
+					case ("pos","neu")=> pos_neu += 1	
+					case ("pos","pos")=> pos_pos += 1						
+				}		
+			}
+		} 	
+	println(s"     pos     neu     neg\npos ${(pos_pos*nbTot/100).ToInt} ${(pos_neu*nbTot/100).ToInt} ${pos_neg*nbTot/100).ToInt} \nneu ${(neu_pos*nbTot/100).ToInt} ${(neu_neu*nbTot/100).ToInt} ${neu_neg*nbTot/100).ToInt}\nneg${(neg_pos*nbTot/100).ToInt ${(neg_neu*nbTot/100).ToInt} ${(neg_neg*nbTot/100).ToInt)}")
+	
+  }
+  
 
   //Observe le score
-  def analysis(tweets: RDD[String], dico: Dictionary.MapWordScore): String = {
+  def analysis(tweets: RDD[String], dico: Dictionary.MapWordScore): RDD[(String,String)] =
     tweets
-      .map { case (tweet) => (tweet, get_score_words(corenlp.extract(tweet), dico)) }
-      .aggregate("\n")(
-        { case (output, (tweet: String, score: Double)) => s"${output}Tweet: ${tweet}\nScore: ${get_sentiment(score)}\n\n" },
-        { _ ++ _ }
-      )
-  }
+      .map { case (tweet) => (tweet, get_sentiment(get_score_words(corenlp.extract(tweet), dico))) }
 
   def analysis2(tweets: RDD[String]): String =
     tweets
