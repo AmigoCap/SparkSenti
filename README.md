@@ -152,3 +152,18 @@ sbt:SparkSenti> push
 
 La différence entre `push` et `pushAll` est que la première met à jour sur le serveur uniquement le code de l'application, la deuxième compresse le .jar de l'application ainsi que toutes ses dépendances avant de les lancer sur le serveur.
 **Il est donc nécessaire de lancer `pushAll` après avoir ajouter une librairie dans le fichier `build.sbt` afin de mettre à jour l'ensemble des librairies sur le serveur**
+
+# Utilisation de Zeppelin
+
+**Prérequis :**
+
+* Un serveur Zeppelin doit être installé sur le datacenter et être en cours d'execution.
+* Vous être en possesion de [Firefox](https://www.mozilla.org/fr/firefox/new/)
+
+**Ouverture d'un tunel ssh:*
+
+Pour avoir accès au client du serveur Zeppelin tournant sur le data center, vous devez ouvrir un tunel SSH entre votre machine et le data center.
+Pour cela, suivre ce [mode opératoir](https://arliguy.net/2013/06/18/proxy-socks-via-ssh-pour-firefox/)
+Une fois, le tunnel SSH ouvert, accédez à l'adresse http://host:port où :
+* host : l'ip du server local Zeppelin ouvert sur le datacenter
+* port : le port du server local Zeppelin ouvert sur le datacenter
