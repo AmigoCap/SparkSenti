@@ -160,7 +160,7 @@ La différence entre `push` et `pushAll` est que la première met à jour sur le
 * Un serveur Zeppelin doit être installé sur le datacenter et être en cours d'execution.
 * Vous être en possesion de [Firefox](https://www.mozilla.org/fr/firefox/new/)
 
-**Ouverture d'un tunel ssh:*
+**Ouverture d'un tunel ssh:**
 
 Pour avoir accès au client du serveur Zeppelin tournant sur le data center, vous devez ouvrir un tunel SSH entre votre machine et le data center.
 Pour cela, suivre ce [mode opératoir](https://arliguy.net/2013/06/18/proxy-socks-via-ssh-pour-firefox/)
