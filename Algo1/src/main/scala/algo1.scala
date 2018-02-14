@@ -67,7 +67,7 @@ object test extends App {
   //Formatage des fichiers sources
 
   val sc = new SparkContext(new SparkConf().setAppName("SparkSenti"))
-  val tweetsList = sc.textFile(tweet_path).map(elem => (Json.parse(elem) \ "text").as[String])
+  val tweetsList = sc.textFile(tweet_path).map(elem => (Json.parse(elem) \ "full_text").as[String])
   val dico = Dictionary.dictionary
 
   //Affichage du resultat
