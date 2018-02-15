@@ -163,7 +163,7 @@ La différence entre `push` et `pushAll` est que la première met à jour sur le
 **Ouverture d'un tunel ssh:**
 
 Pour avoir accès au client du serveur Zeppelin tournant sur le data center, vous devez ouvrir un tunel SSH entre votre machine et le data center.
-Pour cela, suivre ce [mode opératoir](https://arliguy.net/2013/06/18/proxy-socks-via-ssh-pour-firefox/)
+Pour cela, suivre ce [mode opératoire](https://arliguy.net/2013/06/18/proxy-socks-via-ssh-pour-firefox/)
 Une fois, le tunnel SSH ouvert, accédez à l'adresse http://host:port où :
 * host : l'ip du server local Zeppelin ouvert sur le datacenter
 * port : le port du server local Zeppelin ouvert sur le datacenter
