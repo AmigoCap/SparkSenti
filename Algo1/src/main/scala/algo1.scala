@@ -67,13 +67,15 @@ object test extends App {
   //Formatage des fichiers sources
 
   val sc = new SparkContext(new SparkConf().setAppName("SparkSenti"))
-  val tweetsList = sc.textFile(tweet_path).map(elem => (Json.parse(elem) \ "full_text").as[String])
+  val tweetsList = sc.textFile(tweet_path).map(elem => ((Json.parse(elem) \ "full_text").as[String], (Json.parse(elem) \ "id_str" ).as[String]     ))
   val dico = Dictionary.dictionary
 
   //Affichage du resultat
-  println(analysis(tweetsList, dico))
+  //println(analysis(tweetsList, dico))
   println(analysis2(tweetsList))
-
+  //tweetsList.take(3).foreach(println)
+	
+  
   //Observe le score
   def analysis(tweets: RDD[String], dico: Dictionary.MapWordScore): String = {
     tweets
@@ -84,13 +86,23 @@ object test extends App {
       )
   }
 
-  def analysis2(tweets: RDD[String]): String =
-    tweets
-        .map { case (tweet) => (tweet, corenlp.get_score(tweet)) }
-        .aggregate("\n")(
-          { case (output, (tweet: String, score: Int)) => s"${output}Tweet: ${tweet}\nScore: ${get_sentiment2(score)}\n\n" },
-          { _ ++ _ }
-        )
+  def analysis2(tweets: RDD[(String,String)]): String =
+	tweets
+		.map { case (tweet) => (tweet._1, corenlp.get_score(tweet._1),tweet._2) }
+		.aggregate("\n")(
+		  { case (output, (tweet: String, score: Int, id: String)) => s"${output}Tweet: ${tweet}\nScore: ${get_sentiment2(score)}\nTweetID: ${id}\n\n" },
+		  { _ ++ _ }
+		)
+		
+		
+	/*def analysis3(tweets: RDD[(String,String)]: String = {
+	tweets
+		.map { case (tweet) => (tweet.-1, corenlp.get_score(tweet.-1),tweet.-2) }
+		.aggregate("\n")(
+		  { case (output, (tweet: String, score: Int, user: String)) => s"${output}${user} tweeted: ${tweet}\nScore: ${get_sentiment2(score)}\n\n" },
+		  { _ ++ _ }
+		)
+	}*/
 
   def get_sentiment2(score: Int): String = score match {
     case 0 => "Très négatif"
