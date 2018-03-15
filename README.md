@@ -135,7 +135,7 @@ où `nom_du_fichier` est un fichier qui a été `put` au préalable (stocké en 
 **Clé API Twitter**
 
 Pour récupérer des tweets automatiquement, vous devez renseigner votre clé pour l'API Twitter, et les placer dans un fichier. 
-Ouvrez le fichier `API_key_example.txt`, renseignez vos clés personelles, et enregistrez en changeant le nom du fichier à `API_key_.txt`
+Ouvrez le fichier `API_key_example.txt`, renseignez vos clés personelles, et enregistrez en changeant le nom du fichier à `API_key.txt`
 
 **Visualisation des résultats**
 
