@@ -75,7 +75,7 @@ submit := {
 	var outName = ""
 	if (args.length<2)
 	{
-		outName = "defaultoutput.txt"
+		outName = "defaultoutput.json"
 	}
 	else
 		{outName = args(1)}
