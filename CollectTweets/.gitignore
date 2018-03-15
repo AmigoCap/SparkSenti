@@ -1,0 +1,13 @@
+*.class
+*.log
+server.conf
+
+# sbt specific
+target/
+project/project/
+project/target/
+
+# Scala-IDE specific
+.scala_dependencies
+.worksheet
+.idea
