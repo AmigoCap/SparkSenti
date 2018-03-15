@@ -24,6 +24,7 @@ lazy val root = (project in file(".")).
 val init = taskKey[Unit]("Initialize the server.conf file")
 val push = taskKey[Unit]("Send only application jar to server")
 val pushAll = taskKey[Unit]("Package, compress and send to server every needed files")
+val getOutput = inputKey[Unit]("Get output of the spark app")
 val submit = inputKey[Unit]("Decompress and submit spark job")
 val put = inputKey[Unit]("Send a file to the remote server and put it into hdfs")
 
@@ -59,6 +60,13 @@ pushAll := {
     val (server, password) = getCredentials
 
     s"./scripts/push-all.sh ${gzArchive} ${server} ${password}" !
+}
+
+getOutput := {
+    val fileName = Def.spaceDelimited("<arg>").parsed.head
+    val (server, password) = getCredentials
+
+    s"./scripts/getOutput.sh ${fileName} ${server} ${password}" !
 }
 
 submit := {
