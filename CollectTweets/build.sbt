@@ -12,8 +12,12 @@ lazy val root = (project in file(".")).
         name := "SparkSenti",
         libraryDependencies ++= Seq(
             "com.google.code.gson" % "gson" % "2.3.1",
+            "com.github.acrisci" % "commander_2.11" % "0.1.0",
+            "org.apache.bahir" %% "spark-streaming-twitter" % "2.0.0",
             "org.apache.spark" %% "spark-core" % "2.2.1" % "provided",
             "org.apache.spark" %% "spark-yarn" % "2.2.1" % "provided",
+            "org.apache.spark" %% "spark-mllib" % "2.2.1",
+            "org.apache.spark" %% "spark-sql" % "2.2.1",
             "org.apache.spark" %% "spark-streaming" % "2.3.0" % "provided"
         ),
         autoScalaLibrary := false,
