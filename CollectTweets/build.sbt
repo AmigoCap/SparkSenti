@@ -18,7 +18,8 @@ lazy val root = (project in file(".")).
             "org.apache.spark" %% "spark-yarn" % "2.2.1" % "provided",
             "org.apache.spark" %% "spark-mllib" % "2.2.1",
             "org.apache.spark" %% "spark-sql" % "2.2.1",
-            "org.apache.spark" %% "spark-streaming" % "2.3.0" % "provided"
+            "org.apache.spark" %% "spark-streaming" % "2.3.0" % "provided",
+            "edu.stanford.nlp" % "stanford-corenlp" % "3.3.0" artifacts (Artifact("stanford-corenlp", "models"), Artifact("stanford-corenlp"))
         ),
         autoScalaLibrary := false,
         packExcludeJars := Seq("scala-library-.*\\.jar")
