@@ -67,17 +67,17 @@ object test extends App {
   //Formatage des fichiers sources
 
   val sc = new SparkContext(new SparkConf().setAppName("SparkSenti"))
-
-  val tweetAnalysis = sc.textFile(tweet_path).map(elem => "{'result': '" + get_sentiment2(corenlp.get_score(((Json.parse(elem) \ "full_text").as[String])))    + "', 'tweet': " + elem  + "}")
-  tweetAnalysis.collect().foreach(println)
   
+  val tweetAnalysis = sc.textFile(tweet_path).map(elem => """{"result": """" + get_sentiment2(corenlp.get_score(((Json.parse(elem) \ "full_text").as[String])))    + """", "tweet": """ + elem  + "}")
+  tweetAnalysis.collect().foreach(println)
+
   //val dico = Dictionary.dictionary
 
   //Affichage du resultat
   //println(analysis(tweetsList, dico))
   //println(analysis2(tweetsList))
   //tweetsList.take(3).foreach(println)
-	
+
   //           get_sentiment(corenlp.get_score(Json.parse(elem) \ "full_text").as[String]._1))
   //Observe le score
   /*def analysis(tweets: RDD[String], dico: Dictionary.MapWordScore): String = {
@@ -98,8 +98,8 @@ object test extends App {
 		)
 	*/
 
-		
-		
+
+
 	/*def analysis3(tweets: RDD[(String,String)]: String = {
 	tweets
 		.map { case (tweet) => (tweet.-1, corenlp.get_score(tweet.-1),tweet.-2) }
