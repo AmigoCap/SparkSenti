@@ -67,7 +67,7 @@ object test extends App {
   //Formatage des fichiers sources
 
   val sc = new SparkContext(new SparkConf().setAppName("SparkSenti"))
-
+  
   val tweetAnalysis = sc.textFile(tweet_path).map(elem => """{"result": """" + get_sentiment2(corenlp.get_score(((Json.parse(elem) \ "full_text").as[String])))    + """", "tweet": """ + elem  + "}")
   tweetAnalysis.collect().foreach(println)
 
