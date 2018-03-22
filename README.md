@@ -78,6 +78,8 @@ cd SparkSenti/Algo1/
 
 # Utilisation
 
+## Configuration du Datacenter
+
 **Lancement de sbt**
 
 Vous devez être dans le dossier `SparkSenti/Algo1/`.
@@ -117,13 +119,15 @@ sbt:SparkSenti> pushAll
 ```
 Ce script compresse un dossier contenant les .jar de l'application et de toutes les dépendances, puis l'envoie sur votre serveur et le décompresse.
 
+## Utilisation en ligne de commande :
+
+**Lancement de l'algorithme**
+
 Pour envoyer sur le datacenter en HDFS le fichier comptenant les tweets à analyser utiliser la commande :
 ```
 sbt:SparkSenti> put "nom_du_fichier.json"
 ```
 Vous avez à dispoition pour tester le fichier `trump.json` dans le repertoir Algo1.
-
-**Lancement de l'algorithme**
 
 Pour lancer l'algorithme un job spark et visualiser les sentiments des tweets stockés dans votre fichier, lancez la commande:
 ```
@@ -131,11 +135,6 @@ sbt:SparkSenti> submit "nom_du_fichier.json"
 ```
 
 où `nom_du_fichier` est un fichier qui a été `put` au préalable (stocké en HDFS sur le datacer).
-
-**Clé API Twitter**
-
-Pour récupérer des tweets automatiquement, vous devez renseigner votre clé pour l'API Twitter, et les placer dans un fichier. 
-Ouvrez le fichier `API_key_example.txt`, renseignez vos clés personelles, et enregistrez en changeant le nom du fichier à `API_key.txt`
 
 **Visualisation des résultats**
 
@@ -145,9 +144,8 @@ ssh user@IP
 ```
 Lire le fichier `defaultoutput.txt` à la racine :
 ```
-cat defaultoutput.txt
+cat defaultoutput.json
 ```
-
 **Remarque :**
 
 Lorsque vous souhaitez mettre à jour uniquement le code de l'application sur le serveur, vous pouvez utiliser la commande push depuis sbt :
@@ -157,6 +155,17 @@ sbt:SparkSenti> push
 
 La différence entre `push` et `pushAll` est que la première met à jour sur le serveur uniquement le code de l'application, la deuxième compresse le .jar de l'application ainsi que toutes ses dépendances avant de les lancer sur le serveur.
 **Il est donc nécessaire de lancer `pushAll` après avoir ajouter une librairie dans le fichier `build.sbt` afin de mettre à jour l'ensemble des librairies sur le serveur**
+
+## Utilisation clé en main (jupyter notebook)
+
+**Clé API Twitter**
+
+Pour récupérer des tweets automatiquement, vous devez renseigner votre clé pour l'API Twitter, et les placer dans un fichier. 
+Ouvrez le fichier `API_key_example.txt`, renseignez vos clés personelles, et enregistrez en changeant le nom du fichier à `API_key.txt`
+
+
+
+
 
 # Utilisation de Zeppelin
 
