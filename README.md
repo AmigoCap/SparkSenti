@@ -127,7 +127,7 @@ Pour envoyer sur le datacenter en HDFS le fichier comptenant les tweets à analy
 ```
 sbt:SparkSenti> put "nom_du_fichier.json"
 ```
-Vous avez à dispoition pour tester le fichier `trump.json` dans le repertoir Algo1.
+Vous avez à dispoition pour tester le fichier `input_test.json` dans le repertoir Algo1.
 
 Pour lancer l'algorithme un job spark et visualiser les sentiments des tweets stockés dans votre fichier, lancez la commande:
 ```
@@ -142,7 +142,7 @@ Se connecter en SSH à votre compte :
 ```
 ssh user@IP
 ```
-Lire le fichier `defaultoutput.txt` à la racine :
+Lire le fichier `defaultoutput.json` à la racine :
 ```
 cat defaultoutput.json
 ```
@@ -158,32 +158,36 @@ La différence entre `push` et `pushAll` est que la première met à jour sur le
 
 ## Utilisation clé en main (jupyter notebook)
 
+Après avoir suivi le paragraphe, **Configuration du DataCenter**, suivez les étapes suivantes :
+
+**Installation de Jupyter**
+
+Se réferer au mode opératoir décrit sur le [site officiel](http://jupyter.readthedocs.io/en/latest/install.html#id4).
+
+**Installation des librairies Python**
+
+Pour fonctionner, le notebook Python nécessite Python3 et des librairies additionnels. Pour les installer, depuis le terminal lancés la commande :
+```
+pip3 install tweepy squarify geopy geojson folium json-lines matplotlib texttable jsonpickle
+```
+
 **Clé API Twitter**
 
 Pour récupérer des tweets automatiquement, vous devez renseigner votre clé pour l'API Twitter, et les placer dans un fichier. 
-Ouvrez le fichier `API_key_example.txt`, renseignez vos clés personelles, et enregistrez en changeant le nom du fichier à `API_key.txt`
+Ouvrez le fichier `API_key_example.txt` situé dans le dossier `SparkSenti`, renseignez vos clés personelles, et enregistrez en changeant le nom du fichier à `API_key.txt`
 
-
-
-
-
-# Utilisation de Zeppelin
-
-**Prérequis :**
-
-* Un serveur Zeppelin doit être installé sur le datacenter et être en cours d'execution.
-* Vous être en possesion de [Firefox](https://www.mozilla.org/fr/firefox/new/)
-
-**Ouverture d'un tunel ssh:**
-
-Pour avoir accès au client du serveur Zeppelin tournant sur le data center, vous devez ouvrir un tunel SSH entre votre machine et le data center.
-Pour cela, suivre ce [mode opératoire](https://arliguy.net/2013/06/18/proxy-socks-via-ssh-pour-firefox/)
-
-Une fois votre navigateur configuré, pour ouvrir le tunnel sur le port 8080:
+**Lancement de Jupyter**
+Depuis le terminal, dans le dossier `SparkSenti`, lancez la commande :
 ```
- ssh -2NfCT -D 8080 user@IP
+jupyter notebook
 ```
+Séléctionnez le fichier `Workflow.ipynb`.
 
-Une fois, le tunnel SSH ouvert, accédez à l'adresse http://host:port où :
-* host : l'ip du server local Zeppelin ouvert sur le datacenter
-* port : le port du server local Zeppelin ouvert sur le datacenter
+**Configuration de la requête de tweets**
+
+A FAIRE
+
+**Visualisation**
+
+Lancer les blocs un à un jusqu'à obtenir les résultats de l'analyse.
+Vous remarquerez que les fichiers `input_tweet_XXX.json` et `output_tweet_XXX.json` ont été créé dans le dossier `tweets-database` contenant les resultats de l'analyse stocké au format `.json`.
