@@ -1,3 +1,4 @@
 *.class
 *.log
 API_key.txt
+.ipynb_checkpoints
