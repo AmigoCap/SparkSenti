@@ -41,14 +41,14 @@ object test extends App {
   val sc = new SparkContext(new SparkConf().setAppName("SparkSenti"))
 
   val tweetAnalysis = sc.textFile(tweet_path)
-    .map(elem => s"""{"result": "${get_sentiment(corenlp.get_score(((Json.parse(elem) \ "full_text").as[String])))}", "tweet": ${elem}}""")
+    .map    { elem => (elem, corenlp.get_score(((Json.parse(elem) \ "full_text").as[String]))) }
+    .filter { case (elem, score) => score != 0 && score != 4 }
+    .map    { case (elem, score) => s"""{"result": "${get_sentiment(score)}", "tweet": ${elem}}""" }
   tweetAnalysis.collect().foreach(println)
 
   def get_sentiment(score: Int): String = score match {
-    case 0 => "Tres negatif"
     case 1 => "Negatif"
     case 2 => "Neutre"
     case 3 => "Positif"
-    case 4 => "Tres positif"
   }
 }
