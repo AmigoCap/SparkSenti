@@ -168,7 +168,7 @@ Se réferer au mode opératoir décrit sur le [site officiel](http://jupyter.rea
 
 Pour fonctionner, le notebook Python nécessite Python3 et des librairies additionnels. Pour les installer, depuis le terminal lancés la commande :
 ```
-pip3 install tweepy squarify geopy geojson folium json-lines matplotlib texttable jsonpickle
+pip3 install tweepy squarify geopy geojson folium json-lines matplotlib texttable jsonpickle certifi
 ```
 
 **Clé API Twitter**
