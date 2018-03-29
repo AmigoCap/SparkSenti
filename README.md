@@ -191,3 +191,11 @@ A FAIRE
 
 Lancer les blocs un à un jusqu'à obtenir les résultats de l'analyse.
 Vous remarquerez que les fichiers `input_tweet_XXX.json` et `output_tweet_XXX.json` ont été créé dans le dossier `tweets-database` contenant les resultats de l'analyse stocké au format `.json`.
+
+**Dashboard**
+
+Le dashboard utilise une extension de Jupyter, qu'il est nécessaire d'installer. Pour ce faire, reportez vous aux instructions sur [la page suivante](http://jupyter-dashboards-layout.readthedocs.io/en/latest/getting-started.html).
+
+Une fois l'extension installée, ouvrez le fichier `Workflow_dashboard.ipynb`. Exécutez l'ensemble des blocs : cela devrait être rapide car les fonctions sont uniquement défninies, mais jamais appelées. Enfin, dans le menu sélectionnez `View`-> `Dahsboard Preview`. Vous devriez obtenir le dashboard pour sélectionner vos paramètres. Sélectionnez, attendez le chargement, puis cliquez sur les différents boutons pour afficher les visualisations. 
+
+Notez qu'il est également possible de modifier ces paramètres, effectuer de nouveau la requête, puis actualiser les visualisations. 
